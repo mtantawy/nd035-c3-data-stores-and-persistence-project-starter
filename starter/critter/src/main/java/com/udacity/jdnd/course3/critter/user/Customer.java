@@ -4,6 +4,7 @@ import com.udacity.jdnd.course3.critter.pet.Pet;
 import org.hibernate.annotations.Nationalized;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -57,10 +58,16 @@ public class Customer {
     }
 
     public List<Pet> getPets() {
+        if (null == pets) {
+            pets = new ArrayList<>();
+        }
+
         return pets;
     }
 
     public void setPets(List<Pet> pets) {
         this.pets = pets;
     }
+
+    public void addPet(Pet pet) { this.getPets().add(pet); }
 }

@@ -27,7 +27,6 @@ public class PetDTO {
     public Pet createEntity() {
         Pet pet = new Pet();
         BeanUtils.copyProperties(this, pet);
-        // TODO: check if i need to get owner (customer) and set it
 
         return pet;
     }

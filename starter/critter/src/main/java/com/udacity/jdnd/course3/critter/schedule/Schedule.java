@@ -6,6 +6,7 @@ import com.udacity.jdnd.course3.critter.user.EmployeeSkill;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -36,6 +37,10 @@ public class Schedule {
     }
 
     public List<Employee> getEmployees() {
+        if (null == employees) {
+            employees = new ArrayList<>();
+        }
+
         return employees;
     }
 
@@ -44,6 +49,10 @@ public class Schedule {
     }
 
     public List<Pet> getPets() {
+        if (null == pets) {
+            pets = new ArrayList<>();
+        }
+
         return pets;
     }
 

@@ -17,7 +17,7 @@ public class Pet {
 
     private String name;
 
-    @ManyToOne
+    @ManyToOne(optional = false, cascade = CascadeType.PERSIST)
     private Customer owner;
 
     private LocalDate birthDate;
