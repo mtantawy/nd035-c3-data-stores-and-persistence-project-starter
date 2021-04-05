@@ -18,6 +18,7 @@ public class Customer {
 
     private String phoneNumber;
 
+    @Column(columnDefinition="TEXT")
     private String notes;
 
     @OneToMany(mappedBy = "owner")
