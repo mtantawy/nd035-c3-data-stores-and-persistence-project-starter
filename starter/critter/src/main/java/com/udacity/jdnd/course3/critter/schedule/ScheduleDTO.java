@@ -1,8 +1,10 @@
 package com.udacity.jdnd.course3.critter.schedule;
 
 import com.udacity.jdnd.course3.critter.user.EmployeeSkill;
+import org.springframework.beans.BeanUtils;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -17,6 +19,27 @@ public class ScheduleDTO {
     private LocalDate date;
     private Set<EmployeeSkill> activities;
 
+    public static ScheduleDTO createFromEntity(Schedule schedule) {
+        ScheduleDTO dto = new ScheduleDTO();
+        BeanUtils.copyProperties(schedule, dto);
+
+        dto.setEmployeeIds(new ArrayList<>());
+        schedule.getEmployees().forEach(employee -> dto.addEmployeeId(employee.getId()));
+
+        dto.setPetIds(new ArrayList<>());
+        schedule.getPets().forEach(pet -> dto.addPetId(pet.getId()));
+
+        return dto;
+    }
+
+    public Schedule createEntity() {
+        Schedule schedule = new Schedule();
+        BeanUtils.copyProperties(this, schedule);
+        // TODO: check if i need to get pets and employees and set them
+
+        return schedule;
+    }
+
     public List<Long> getEmployeeIds() {
         return employeeIds;
     }
@@ -25,6 +48,8 @@ public class ScheduleDTO {
         this.employeeIds = employeeIds;
     }
 
+    public void addEmployeeId(Long employeeId) { this.employeeIds.add(employeeId); }
+
     public List<Long> getPetIds() {
         return petIds;
     }
@@ -32,6 +57,8 @@ public class ScheduleDTO {
     public void setPetIds(List<Long> petIds) {
         this.petIds = petIds;
     }
+
+    public void addPetId(Long petId) {this.petIds.add(petId); }
 
     public LocalDate getDate() {
         return date;

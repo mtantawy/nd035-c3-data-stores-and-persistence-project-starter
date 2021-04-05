@@ -1,5 +1,7 @@
 package com.udacity.jdnd.course3.critter.pet;
 
+import org.springframework.beans.BeanUtils;
+
 import java.time.LocalDate;
 
 /**
@@ -13,6 +15,22 @@ public class PetDTO {
     private long ownerId;
     private LocalDate birthDate;
     private String notes;
+
+    public static PetDTO createFromEntity(Pet pet) {
+        PetDTO dto =  new PetDTO();
+        BeanUtils.copyProperties(pet, dto);
+        dto.setOwnerId(pet.getOwner().getId());
+
+        return dto;
+    }
+
+    public Pet createEntity() {
+        Pet pet = new Pet();
+        BeanUtils.copyProperties(this, pet);
+        // TODO: check if i need to get owner (customer) and set it
+
+        return pet;
+    }
 
     public PetType getType() {
         return type;

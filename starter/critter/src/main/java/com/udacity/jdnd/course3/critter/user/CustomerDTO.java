@@ -1,5 +1,8 @@
 package com.udacity.jdnd.course3.critter.user;
 
+import org.springframework.beans.BeanUtils;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,6 +15,24 @@ public class CustomerDTO {
     private String phoneNumber;
     private String notes;
     private List<Long> petIds;
+
+    public static CustomerDTO createFromEntity(Customer customer) {
+        CustomerDTO dto = new CustomerDTO();
+        BeanUtils.copyProperties(customer, dto);
+
+        dto.setPetIds(new ArrayList<>());
+        customer.getPets().forEach(pet -> dto.setPetId(pet.getId()));
+
+        return dto;
+    }
+
+    public Customer createEntity() {
+        Customer customer = new Customer();
+        BeanUtils.copyProperties(this, customer);
+        // TODO: check if i need to set Pets =
+
+        return customer;
+    }
 
     public long getId() {
         return id;
@@ -52,4 +73,6 @@ public class CustomerDTO {
     public void setPetIds(List<Long> petIds) {
         this.petIds = petIds;
     }
+
+    public void setPetId(Long petId) { this.petIds.add(petId); }
 }
