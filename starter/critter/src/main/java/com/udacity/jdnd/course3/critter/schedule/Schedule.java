@@ -48,6 +48,8 @@ public class Schedule {
         this.employees = employees;
     }
 
+    public void addEmployee(Employee employee) { this.getEmployees().add(employee); }
+
     public List<Pet> getPets() {
         if (null == pets) {
             pets = new ArrayList<>();
@@ -59,6 +61,8 @@ public class Schedule {
     public void setPets(List<Pet> pets) {
         this.pets = pets;
     }
+
+    public void addPet(Pet pet) { this.getPets().add(pet); }
 
     public LocalDate getDate() {
         return date;

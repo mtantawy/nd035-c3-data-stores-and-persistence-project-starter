@@ -40,6 +40,13 @@ public class ScheduleDTO {
         return schedule;
     }
 
+    public static List<ScheduleDTO> convertEntityListToDTOs(List<Schedule> schedules) {
+        List<ScheduleDTO> scheduleDTOs = new ArrayList<>();
+        schedules.forEach(schedule -> scheduleDTOs.add(createFromEntity(schedule)));
+
+        return scheduleDTOs;
+    }
+
     public List<Long> getEmployeeIds() {
         return employeeIds;
     }
